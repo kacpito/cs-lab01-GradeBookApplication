@@ -13,15 +13,34 @@ namespace GradeBook.GradeBooks
             Name = name;
             Type = GradeBookType.Ranked;
         }
-        /*
+        
         public override char GetLetterGrade(double averageGrade)
         {
             if (Students.Count < 5)
                 throw new ArgumentException("Not enough students!");
 
-            int N = Students.Count / 5;
+            double n = Students.Count / 5;
+            List<double> averageStudentGrades = new List<double>();
+
+            foreach(var student in Students)
+            {
+                averageStudentGrades.Add(student.AverageGrade);
+            }
+
+            averageStudentGrades.Sort();
+
+            if (averageGrade < averageStudentGrades[(int)Math.Floor(n)])
+                return 'F';
+            else if (averageGrade < averageStudentGrades[(int)Math.Floor(n * 2)])
+                return 'D';
+            else if (averageGrade < averageStudentGrades[(int)Math.Floor(n * 3)])
+                return 'C';
+            else if (averageGrade < averageStudentGrades[(int)Math.Floor(n * 4)])
+                return 'B';
+            else
+                return 'A';
         }
-        */
+        
         public override void CalculateStatistics()
         {
             if (Students.Count < 5)
